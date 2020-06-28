@@ -51,7 +51,7 @@ class AddCard extends Component{
         return (
             <View style={{flex: 1,justifyContent: "space-between", backgroundColor:white}}>
                 <View>
-                    <Text style={styles.addDeckTitle}>What is your new question?</Text>
+                    <Text style={styles.newQuestionTitle}>What is your new question?</Text>
                     <TextInput 
                         style={styles.textInput} 
                         placeholder="Question..."
@@ -74,7 +74,7 @@ class AddCard extends Component{
 }
 
 const styles = StyleSheet.create({
-  addDeckTitle: {
+  newQuestionTitle: {
     marginTop: 40,
     textAlign: "center", 
     fontSize: 36

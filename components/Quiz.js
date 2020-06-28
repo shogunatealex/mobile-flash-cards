@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
-import { getDecks } from '../utils/api'
-import { receiveDecks } from '../actions'
-import Deck  from "./Deck";
-import { white, purple, red, brown } from '../utils/colors'
+import { clearLocalNotification, setLocalNotification } from '../utils/notifications'
+import { purple, red, brown } from '../utils/colors'
 
 class Quiz extends Component{
 
@@ -53,13 +51,15 @@ class Quiz extends Component{
         const { questions, navigation } = this.props
         const currentQuestion = questions[questionsAnswered];
         if(questionsAnswered === questions.length){
+            clearLocalNotification()
+            .then(setLocalNotification);
             return (
-                <View style={styles.deckDetailsContainer}>
+                <View style={styles.quizContainer}>
                     <View style={styles.deck}>
                         <Text style={styles.addDeckTitle}>You answered {correctAnswers} out of {questionsAnswered} correctly! </Text>
                     </View>
                     <View>
-                        <View style={styles.deleteDeckButton} onPress={this.deleteDeck}>
+                        <View style={styles.quizStatus} onPress={this.deleteDeck}>
                             <Text style={{color: brown,fontSize: 24}}>Great Job!</Text>
                         </View>
                         <TouchableOpacity style={styles.addCardButton} onPress={this.resetQuiz}>
@@ -74,7 +74,7 @@ class Quiz extends Component{
             )
         }
         return (
-            <View style={styles.deckDetailsContainer}>
+            <View style={styles.quizContainer}>
                 <View style={styles.deck}>
                     <Text style={styles.addDeckTitle}>
                         {showAnswer 
@@ -87,7 +87,7 @@ class Quiz extends Component{
 
                 </View>
                 <View>
-                    <View style={styles.deleteDeckButton} onPress={this.deleteDeck}>
+                    <View style={styles.quizStatus} onPress={this.deleteDeck}>
                         <Text style={{color: brown,fontSize: 24}}>{questions.length - questionsAnswered} Questions Remaining</Text>
                     </View>
                     <TouchableOpacity style={styles.addCardButton} onPress={this.isCorrect}>
@@ -105,7 +105,7 @@ class Quiz extends Component{
 }
 
 const styles = StyleSheet.create({
-    deckDetailsContainer: {
+    quizContainer: {
         flex: 1,
         justifyContent: "space-between"
     },
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         margin: 20,
     },
-    deleteDeckButton: {
+    quizStatus: {
         justifyContent: "center",
         alignItems: "center",
         marginBottom: 50
@@ -146,9 +146,6 @@ const styles = StyleSheet.create({
         padding: 20,
         alignItems: "center",
     },
-    deckHeader: {
-        fontSize: 36
-    }
 })
 
 

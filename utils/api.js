@@ -58,10 +58,7 @@ export function addCardToDeck(question, answer, title) {
     
 
     return getDecks().then((decks) => {
-        console.log(decks);
-        console.log(decks, decks[title], newQuestion);
         decks && decks[title] && decks[title].questions.push(newQuestion)
-        console.log(decks);
         return AsyncStorage.setItem(DECKS_KEY, JSON.stringify(decks)).then((item) => item)
     })
 

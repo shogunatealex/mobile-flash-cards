@@ -14,6 +14,7 @@ import Constants from 'expo-constants';
 import DeckDetails from './components/DeckDetails';
 import AddCard from './components/AddCard';
 import Quiz from './components/Quiz';
+import { setLocalNotification } from './utils/notifications'
 
 const Tabs = (createBottomTabNavigator({
   ShowDecks: {
@@ -93,28 +94,29 @@ const MainNavigator = createAppContainer(createStackNavigator({
 }))
 
 
+function FlashCardsStatusBar () {
+  return (
+    <View style={{ backgroundColor: purple, height: Constants.statusBarHeight }}>
+      <StatusBar translucent backgroundColor={purple}/>
+    </View>
+  )
+}
+
+
 export default class App extends React.Component {
 
+  componentDidMount() {
+    setLocalNotification()
+  }
 
   render() {
     return (
       <Provider store={createStore(reducer)}>
         <View style={{flex: 1}}>
-            <View style={{ backgroundColor: purple, height: Constants.statusBarHeight }}>
-              <StatusBar translucent backgroundColor={purple}/>
-            </View>
-          <MainNavigator style={{backgroundColor:white}}/>
+            <FlashCardsStatusBar/>
+            <MainNavigator style={{backgroundColor:white}}/>
         </View>
       </Provider>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

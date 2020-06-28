@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native'
-import { brown, offWhite, purple, white } from '../utils/colors'
+import { brown, purple } from '../utils/colors'
 import { connect } from 'react-redux'
 import { deleteDeck } from '../utils/api'
 import { deleteDeck as deleteDeckAction } from '../actions'
@@ -26,11 +26,10 @@ export class DeckDetails extends Component {
         }
         const { title, questions } = this.props.deckInfo
         const { navigation } = this.props;
-        console.log('here');
         return (
             <View style={styles.deckDetailsContainer}>
                 <View style={styles.deck}>
-                    <Text style={styles.addDeckTitle}>{title}</Text>
+                    <Text style={styles.deckDetailsTitle}>{title}</Text>
                     <Text>{questions.length} Card{questions.length === 1 ? "" : "s"}</Text>
                 </View>
                 <View>
@@ -59,7 +58,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "space-between"
     },
-    addDeckTitle: {
+    deckDetailsTitle: {
         marginTop: 40,
         textAlign: "center", 
         fontSize: 36

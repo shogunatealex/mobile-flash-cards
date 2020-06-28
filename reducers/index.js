@@ -23,9 +23,6 @@ function entries (state = {}, action) {
         case DELETE_DECK: 
             const key = action.title;
             const { [key]: value, ...newState } = state;
-            console.log("-----------");
-            console.log(newState);
-            console.log("-----------");
             return newState
         default :
             return state
