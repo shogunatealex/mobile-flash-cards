@@ -20,14 +20,16 @@ class Quiz extends Component{
     isCorrect = () => {
         this.setState({
             correctAnswers: this.state.correctAnswers + 1,
-            questionsAnswered: this.state.questionsAnswered + 1
+            questionsAnswered: this.state.questionsAnswered + 1,
+            showAnswer: false
         })
     }
 
     isIncorrect = () => {
         this.setState({
             incorrectAnswers: this.state.CorrectAnswers + 1,
-            questionsAnswered: this.state.questionsAnswered + 1
+            questionsAnswered: this.state.questionsAnswered + 1,
+            showAnswer: false
         })
     }
 
